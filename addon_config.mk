@@ -84,8 +84,9 @@ android/armeabi-v7a:
 	ADDON_LIBS =
 
 osx:
-	ADDON_LIBS = libs/lib/osx/libgit2.a
-	ADDON_LIBS += libs/lib/osx/libssh2.a
+	ADDON_LIBS = libs/libgit2/osx/libgit2.a
+	ADDON_LIBS += libs/libgit2/osx/libssh2.a
 
-	ADDON_INCLUDES_EXCLUDE = libs/include/git2/%
+	ADDON_INCLUDES_EXCLUDE = libs/libgit2/include/git2/%
+
 	
