@@ -30,6 +30,8 @@ common:
 	# but if the addon or addon libraries need special search paths they can be
 	# specified here separated by spaces or one per line using +=
 	# ADDON_INCLUDES = 
+	ADDON_INCLUDES_EXCLUDE = libs/libgit2/include/%
+	#ADDON_INCLUDES_EXCLUDE = libs/libgit2/include/git2/%
 	
 	# any special flag that should be passed to the compiler when using this
 	# addon
@@ -87,6 +89,5 @@ osx:
 	ADDON_LIBS = libs/libgit2/osx/libgit2.a
 	ADDON_LIBS += libs/libgit2/osx/libssh2.a
 
-	ADDON_INCLUDES_EXCLUDE = libs/libgit2/include/git2/%
-
 	
+
