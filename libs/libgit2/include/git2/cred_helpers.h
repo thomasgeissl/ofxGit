@@ -7,7 +7,7 @@
 #ifndef INCLUDE_git_cred_helpers_h__
 #define INCLUDE_git_cred_helpers_h__
 
-#include "git2/transport.h"
+#include "transport.h"
 
 /**
  * @file git2/cred_helpers.h
@@ -22,8 +22,8 @@ GIT_BEGIN_DECL
  * Payload for git_cred_stock_userpass_plaintext.
  */
 typedef struct git_cred_userpass_payload {
-	char *username;
-	char *password;
+	const char *username;
+	const char *password;
 } git_cred_userpass_payload;
 
 
@@ -34,7 +34,7 @@ typedef struct git_cred_userpass_payload {
  *
  * @param cred The newly created credential object.
  * @param url The resource for which we are demanding a credential.
- * @param user_from_url The username that was embedded in a "user@host"
+ * @param user_from_url The username that was embedded in a "user\@host"
  *                          remote url, or NULL if not included.
  * @param allowed_types A bitmask stating which cred types are OK to return.
  * @param payload The payload provided when specifying this callback.  (This is

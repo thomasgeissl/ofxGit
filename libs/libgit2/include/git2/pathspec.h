@@ -12,6 +12,8 @@
 #include "strarray.h"
 #include "diff.h"
 
+GIT_BEGIN_DECL
+
 /**
  * Compiled pathspec
  */
@@ -187,7 +189,7 @@ GIT_EXTERN(int) git_pathspec_match_tree(
  */
 GIT_EXTERN(int) git_pathspec_match_diff(
 	git_pathspec_match_list **out,
-	git_diff_list *diff,
+	git_diff *diff,
 	uint32_t flags,
 	git_pathspec *ps);
 
@@ -257,4 +259,5 @@ GIT_EXTERN(size_t) git_pathspec_match_list_failed_entrycount(
 GIT_EXTERN(const char *) git_pathspec_match_list_failed_entry(
 	const git_pathspec_match_list *m, size_t pos);
 
+GIT_END_DECL
 #endif
