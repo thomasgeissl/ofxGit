@@ -256,7 +256,7 @@ public:
 		if (!checkError(err)) return false;
 
 		Object target(repo, getOID());
-		git_reset(repo, target, GIT_RESET_HARD);
+//		git_reset(repo, target, GIT_RESET_HARD);//TODO
 
 		return true;
 	}
@@ -304,7 +304,9 @@ public:
 
 	Repository() : repo(NULL)
 	{
-		git_threads_init();
+//		git_threads_init();
+        git_libgit2_init ();
+
 	}
 
 	~Repository() { close(); }
@@ -336,11 +338,11 @@ public:
 		vector<string> result;
 		int err;
 
-		err = git_branch_foreach(repo, GIT_BRANCH_LOCAL, git_branch_foreach_cb, &result);
-		if (!checkError(err)) return vector<string>();
+//		err = git_branch_foreach(repo, GIT_BRANCH_LOCAL, git_branch_foreach_cb, &result);
+//		if (!checkError(err)) return vector<string>();
 
-		err = git_branch_foreach(repo, GIT_BRANCH_REMOTE, git_branch_foreach_cb, &result);
-		if (!checkError(err)) return vector<string>();
+//		err = git_branch_foreach(repo, GIT_BRANCH_REMOTE, git_branch_foreach_cb, &result);
+//		if (!checkError(err)) return vector<string>();
 
 		return result;
 	}
@@ -398,15 +400,17 @@ public:
 		void task()
 		{
 			git_clone_options clone_opts = GIT_CLONE_OPTIONS_INIT;
-			git_checkout_opts checkout_opts = GIT_CHECKOUT_OPTS_INIT;
+//            git_checkout_opts checkout_opts = GIT_CHECKOUT_OPTS_INIT;
+            git_checkout_options checkout_opts = GIT_CHECKOUT_OPTIONS_INIT;
 
 			checkout_opts.progress_cb = HasCheckoutProgressCallback::git_checkout_progress_cb;
 			checkout_opts.progress_payload = repo;
-			checkout_opts.checkout_strategy = GIT_CHECKOUT_SAFE_CREATE;
+//            checkout_opts.checkout_strategy = GIT_CHECKOUT_SAFE_CREATE;
+            checkout_opts.checkout_strategy = GIT_CHECKOUT_SAFE;
 
-			clone_opts.fetch_progress_cb = HasTransferProgressCallback::git_transfer_progress_callback;
-			clone_opts.fetch_progress_payload = repo;
-			clone_opts.transport_flags = GIT_TRANSPORTFLAGS_NO_CHECK_CERT;
+//			clone_opts.fetch_progress_cb = HasTransferProgressCallback::git_transfer_progress_callback;//TODO
+//			clone_opts.fetch_progress_payload = repo;//TODO
+//			clone_opts.transport_flags = GIT_TRANSPORTFLAGS_NO_CHECK_CERT;//TODO
 			clone_opts.checkout_opts = checkout_opts;
 
 			int err = git_clone(&repo->repo, remote_url.c_str(), local_path.c_str(), &clone_opts);

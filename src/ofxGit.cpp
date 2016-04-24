@@ -14,8 +14,8 @@ public:
 		{
 			remote = remote_.getRemote();
 			
-			int err = git_remote_connect(remote, direction);
-			checkError(err);
+//			int err = git_remote_connect(remote, direction);//TODO: missing callback
+//			checkError(err);
 		}
 		
 		~Connection()
@@ -42,10 +42,11 @@ public:
 	{
 		int err;
 		
-		err = git_remote_load(&remote, local, remote_name.c_str());
+//		err = git_remote_load(&remote, local, remote_name.c_str());
+        err = git_remote_lookup(&remote, local, remote_name.c_str());
 		if (!checkError(err)) return false;
 		
-		git_remote_check_cert(remote, false);
+//		git_remote_check_cert(remote, false);//TODO
 		
 		return true;
 	}
@@ -71,17 +72,17 @@ public:
 		return git_remote_url(remote);
 	}
 	
-	void list() const
-	{
-		if (!isConnected()) return false;
+//	void list() const
+//	{
+//		if (!isConnected()) return false;
 		
-		int err;
+//		int err;
 		
-		err = git_remote_ls(remote, git_headlist_cb, (void*)this);
-		if (!checkError(err)) return false;
+//		err = git_remote_ls(remote, git_headlist_cb, (void*)this);
+//		if (!checkError(err)) return false;
 		
-		return true;
-	}
+//		return true;
+//	}
 	
 	bool isConnected() const
 	{
